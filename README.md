@@ -28,7 +28,7 @@ A project that aims to be a web editor for Kustom apps like KWGT or KLWP.
 * run the index.html file in your browser
 * upload the JSON file from the unziped file into the webpage
 
-Please note that this is just a start and more is to come, if it does not work very well I apologize it is just so I can read the code to develop the webpage, if there is anything that you feel would be a good feature for this little tool feel free to say somthing on https://forum.kustom.rocks/ where I mentioned this
+Please note that this is just a start and more is to come, if it does not work very well I apologize it is just so I can read the code to develop the webpage, if there is anything that you feel would be a good feature for this little tool feel free to say somthing on [https://forum.kustom.rocks/](https://forum.kustom.rocks/t/kustom-file-viewer/9004) where I mentioned this
 
 Also chatGPT did most of the coding for this project because my JS knowledge is limited and I am using this project to learn
 
