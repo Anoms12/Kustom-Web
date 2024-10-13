@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+
+    <title>KLWP JSON Reader</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      #unzipInput {
+        margin-bottom: 10px;
+      }
+      #unzipButton {
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .output {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Unzip Files</h1>
+    <input type="file" id="unzipInput" accept=".zip" />
+    <button id="unzipButton" onclick="unzipFile()">Unzip</button>
+    <div class="output" id="unzipOutput"></div>
+
+    <script>
+      async function unzipFile() {
+        const fileInput = document.getElementById("unzipInput");
+        const outputDiv = document.getElementById("unzipOutput");
+        const file = fileInput.files[0];
+
+        if (!file) {
+          alert("Please select a ZIP file.");
+          return;
+        }
+
+        const zip = new JSZip(); // Ensure JSZip is included in your project
+
+        try {
+          const content = await file.arrayBuffer();
+          const zipFiles = await zip.loadAsync(content);
+          outputDiv.innerHTML = "<h2>Unzipped Files:</h2><ul>";
+
+          for (const filename in zipFiles.files) {
+            outputDiv.innerHTML += `<li>${filename}</li>`;
+          }
+          outputDiv.innerHTML += "</ul>";
+        } catch (error) {
+          alert("Error unzipping the file: " + error.message);
+        }
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  </body>
+</html>
+<script src="script.js"></script>
