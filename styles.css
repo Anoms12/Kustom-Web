@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f8f8; /* Light background for better contrast */
+    color: #333; /* Default text color */
+    margin: 20px; /* General margin for the body */
+  }
+  .output {
+    margin-top: 20px;
+    background-color: #fff; /* White background for output section */
+    border-radius: 8px; /* Rounded corners for output */
+    padding: 15px; /* Padding inside the output */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  }
+  .section {
+    margin-bottom: 25px;
+/* Style for h1 elements */
+h1 {
+    text-align: left; /* Aligns the text to the left */
+    margin: 20px 0; /* Add some space above and below */
+}
+
+/* Additional styles for other headings (optional) */
+h2 {
+    text-align: left; /* Aligns h2 to the left */
+    margin: 15px 0; /* Add some space above and below */
+}
+
+h3 {
+    text-align: left; /* Aligns h3 to the left */
+    margin: 10px 0; /* Add some space above and below */
+}
+
+h4 {
+    text-align: left; /* Aligns h4 to the left */
+    margin: 5px 0; /* Add some space above and below */
+}
+
+/* Style for output div */
+#output {
+    margin: 0 20px; /* Add margin to the sides for better spacing */
+    font-family: Arial, sans-serif; /* Set a clean font for readability */
+}
+  }
+  ul {
+    list-style-type: circle;
+    margin-left: 20px;
+  }
