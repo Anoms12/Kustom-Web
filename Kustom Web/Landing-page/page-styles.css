@@ -1,0 +1,145 @@
+#body {
+  background-color: #333333;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+#loading-screen {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #333;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+
+.spinner {
+border: 8px solid #f3f3f3;
+border-top: 8px solid #FF0000;
+border-radius: 50%;
+width: 60px;
+height: 60px;
+animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+#upload-kustom-file {
+  position: absolute;
+  top: 30%;
+  left: 25%;
+}
+
+#create-kustom-file {
+  position: absolute;
+  top: 30%;
+  right: 25%;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.kustom-file-upload {
+  border: 2px solid #5d5d5d;
+  border-radius: 4px;
+  color: #ececec;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.kustom-file-upload::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.5s ease;
+  transform: translateX(-50%) translateY(-100%);
+}
+
+.kustom-file-upload:hover::before {
+  transform: translateX(-50%) translateY(0);
+}
+
+.kustom-file-upload:hover {
+  background-color: #3d3d3d;
+  border-color: #ececec;
+  transform: scale(1.05);
+}
+
+/* Hide dropdown by default */
+.hidden {
+  display: none;
+}
+
+/* Style for dropdown menu */
+.dropdown {
+  background-color: #333; /* Matches the body background */
+  border: 1px solid #5d5d5d; /* Border to match the button */
+  border-radius: 4px; /* Rounded corners */
+  position: absolute; /* Absolute positioning */
+  right: 0%; /* Keep this to match the button position */
+  z-index: 999; /* Ensure it appears above other elements */
+  width: 200px; /* Set width for the dropdown */
+  font-family: Arial, Helvetica, sans-serif; /* Match font family */
+  font-size: 16px; /* Adjust font size to match existing text */
+}
+
+/* Dropdown list styles */
+.dropdown ul {
+  list-style-type: none; /* Remove bullet points */
+  margin: 0; /* Reset margin */
+  padding: 0; /* Reset padding */
+}
+
+/* Dropdown item styles */
+.dropdown li {
+  padding: 8px 16px; /* Padding for dropdown items */
+}
+
+/* Dropdown link styles */
+.dropdown li a {
+  color: #ececec; /* Link color */
+  text-decoration: none; /* Remove underline */
+  display: block; /* Make the whole area clickable */
+}
+
+/* Dropdown item hover effect */
+.dropdown li:hover {
+  background-color: #444; /* Change background on hover */
+}
+
+/* Optional: Style for the dropdown toggle button */
+.dropdown-toggle {
+  background-color: #3d3d3d; /* Button background */
+  color: #ececec; /* Button text color */
+  border: 2px solid #5d5d5d; /* Button border */
+  border-radius: 4px; /* Rounded corners for button */
+  padding: 8px 12px; /* Button padding */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+/* Button hover effect */
+.dropdown-toggle:hover {
+  background-color: #444; /* Darker background on hover */
+}

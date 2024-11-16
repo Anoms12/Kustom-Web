@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="editor-styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"
+    />
+    <!-- 'classic' theme -->
+    <title>Kustom File Editor</title>
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js" defer></script>
+  </head>
+  <body id="body">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Main- Content-->
+    <div id="top-functions-container">
+      <div id="project-info">
+        <h1 class="project-name">New Project</h1>
+        <h2 id="project-type">uh-oh, this bad</h2>
+      </div>
+      <div id="selected-options">
+        <svg class="icon" id="delete-icon">
+          <use href="icons.svg#icon-delete"></use>
+        </svg>
+      </div>
+      <div class="button-container">
+        <label for="save-local-btn" class="save-btns"> Save </label>
+        <input id="save-local-btn" type="button" class="save-btn" />
+      </div>
+      <div class="button-container">
+        <label for="export-json-btn" class="save-btns"> Export File </label>
+        <input id="export-json-btn" type="button" class="save-btn" />
+      </div>
+      <div id="add-icon">
+        <svg class="icon">
+          <use href="icons.svg#icon-add"></use>
+        </svg>
+      </div>
+      <div id="undo-redo-container">
+        <svg class="icon" id="undo-icon">
+          <use href="icons.svg#icon-add"></use>
+        </svg>
+        <svg class="icon" id="redo-icon">
+          <use href="icons.svg#icon-add"></use>
+        </svg>
+      </div>
+    </div>
+    <div id="right-editor-container">
+      <div id="attribute-types">
+        <div class="attribute-type" id="style-attributes">STYLE</div>
+        <div class="attribute-type" id="paint-attributes">PAINT</div>
+        <div class="attribute-type" id="fx-attributes">FX</div>
+        <div class="attribute-type" id="position-attributes">POSITION</div>
+        <div class="attribute-type" id="touch-attributes">TOUCH</div>
+      </div>
+      <div id="dynamic-attributes">
+        <div class="item-attribute" id="option-select">
+          <svg class="icon" id="attribute-icon">
+            <use href="icons.svg#icon-text"></use>
+          </svg>
+          <h1 id="attribute-name">Dropdown</h1>
+          <h1 class="attribute-value">Click To Dropdown</h1>
+          <svg class="icon" id="select-attribute-selected-icon">
+            <use href="icons.svg#icon-selected-no"></use>
+          </svg>
+        </div>
+        <div class="item-attribute" id="option-type">
+          <svg class="icon" id="attribute-icon">
+            <use href="icons.svg#icon-text"></use>
+          </svg>
+          <h1 id="attribute-name">Text</h1>
+          <h1 class="attribute-value">Current Time</h1>
+          <svg class="icon" id="select-attribute-selected-icon">
+            <use href="icons.svg#icon-selected-no"></use>
+          </svg>
+        </div>
+
+        <div class="item-attribute" id="value-toggle">
+          <svg class="icon" id="attribute-icon">
+            <use href="icons.svg#icon-text"></use>
+          </svg>
+          <h1 id="attribute-name">Width</h1>
+
+          <div id="down-buttons">
+            <svg class="icon" id="subtract-twenty">
+              <use href="icons.svg#icon-skip"></use>
+            </svg>
+            <svg class="icon" id="subtract-one">
+              <use href="icons.svg#icon-minus"></use>
+            </svg>
+          </div>
+          <h1 class="attribute-value">20</h1>
+
+          <div id="up-buttons">
+            <div id="down-buttons">
+              <svg class="icon" id="add-one">
+                <use href="icons.svg#icon-add"></use>
+              </svg>
+              <svg class="icon" id="add-twenty">
+                <use href="icons.svg#icon-skip"></use>
+              </svg>
+            </div>
+          </div>
+          <svg class="icon" id="select-attribute-selected-icon">
+            <use href="icons.svg#icon-selected-no"></use>
+          </svg>
+        </div>
+
+        <div class="item-attribute" id="option-slider">
+          <svg class="icon" id="attribute-icon">
+            <use href="icons.svg#icon-text"></use>
+          </svg>
+          <h1 id="attribute-name">Offset</h1>
+
+          <svg class="icon" id="slider-subtract-one">
+            <use href="icons.svg#icon-minus"></use>
+          </svg>
+          <div class="slidecontainer">
+            <input
+              type="range"
+              min="1"
+              max="100"
+              value="50"
+              class="slider"
+              id="myRange"
+            />
+          </div>
+          <svg class="icon" id="silder-add-one">
+            <use href="icons.svg#icon-add"></use>
+          </svg>
+          <h1 class="attribute-value">0</h1>
+          <svg class="icon" id="select-attribute-selected-icon">
+            <use href="icons.svg#icon-selected-no"></use>
+          </svg>
+        </div>
+        <div class="item-attribute" id="option-hex">
+          <svg class="icon" id="attribute-icon">
+            <use href="icons.svg#icon-text"></use>
+          </svg>
+          <h1 id="attribute-name">Color</h1>
+
+          <h1 id="hex-value" class="attribute-value" style="cursor: pointer">
+            #FFFFFFFF
+          </h1>
+          <div id="color-picker-container"></div>
+          <!-- Container for Pickr -->
+          <svg class="icon" id="select-attribute-selected-icon">
+            <use href="icons.svg#icon-selected-no"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div id="right-functions-container"></div>
+    <div id="left-functions-container"></div>
+    <div id="bottom-controls-container">
+      <div id="main-functions-overall">
+        <div class="main-functions" id="items-tab-functions">
+          <h1>ITEMS 1/92</h1>
+        </div>
+        <div class="main-functions" id="background-tab-functions">
+          <h1>BACKGROUND</h1>
+        </div>
+        <div class="main-functions" id="layer-tab-functions">
+          <h1>LAYER</h1>
+        </div>
+        <div class="main-functions" id="position-tab-functions">
+          <h1>POSITION</h1>
+        </div>
+        <div class="main-functions" id="globals-tab-functions">
+          <h1 class="not-functionable-yet">GLOBALS</h1>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            viewBox="0 0 17 17"
+            fill="none"
+          >
+            <path
+              d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z"
+              stroke="#ACACAC"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8.5 11.5V8.5M8.5 5.5H8.5075"
+              stroke="#ACACAC"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="main-functions" id="flows-tab-functions">
+          <h1 class="not-functionable-yet">FLOWS</h1>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            viewBox="0 0 17 17"
+            fill="none"
+          >
+            <path
+              d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z"
+              stroke="#ACACAC"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8.5 11.5V8.5M8.5 5.5H8.5075"
+              stroke="#ACACAC"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="main-functions" id="shortcuts-tab-functions">
+          <h1>SHORTCUTS</h1>
+        </div>
+      </div>
+      <div id="display-general-options"></div>
+    </div>
+    <div id="overlay"></div>
+    <div id="select-item-type">
+      <div class="item-type-display" id="komponent-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-komponent"></use>
+          </svg>
+          <h1>Komponent</h1>
+        </div>
+        <p>
+          Add a prebuilt reusable component (signal indicators, battery
+          icons...) or create your own.
+        </p>
+      </div>
+
+      <div class="item-type-display" id="text-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-text"></use>
+          </svg>
+          <h1>Text</h1>
+        </div>
+        <p>
+          This item allows you to enter any text; you can either choose from a
+          list of examples or create your own string using a lot of available
+          functions.
+        </p>
+      </div>
+
+      <div class="item-type-display" id="shape-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-shape"></use>
+          </svg>
+          <h1>Shape</h1>
+        </div>
+        <p>
+          Create a rectangle, a circle, etc., and fill them with colors,
+          gradients, and more.
+        </p>
+      </div>
+
+      <div class="item-type-display" id="image-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-image"></use>
+          </svg>
+          <h1>Image</h1>
+        </div>
+        <p>A simple object holding a static picture.</p>
+      </div>
+
+      <div class="item-type-display" id="fonticon-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-info"></use>
+          </svg>
+          <h1>Fonticon</h1>
+        </div>
+        <p>
+          Scalable, vector-based icons from different packs (this is currently
+          unavailable as I have to think about the best way to implement this,
+          sorry for any inconvenience).
+        </p>
+      </div>
+
+      <div class="item-type-display" id="progress-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-progress"></use>
+          </svg>
+          <h1>Progress</h1>
+        </div>
+        <p>Create progress bars with different styles, shapes, and colors.</p>
+      </div>
+
+      <div class="item-type-display" id="morphing-text-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-morphing-text"></use>
+          </svg>
+          <h1>Morphing Text</h1>
+        </div>
+        <p>
+          Single line text with many different transformers like curving and
+          flipping.
+        </p>
+      </div>
+
+      <div class="item-type-display" id="series-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-series"></use>
+          </svg>
+          <h1>Series</h1>
+        </div>
+        <p>
+          Customizable series for dates, time, battery, and more with mutiple
+          style configurations
+        </p>
+      </div>
+
+      <div class="item-type-display" id="overlap-group-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-overlap-group"></use>
+          </svg>
+          <h1>Overlap Group</h1>
+        </div>
+        <p>
+          A container for other objects that supports transformations and allows
+          item grouping and supports gravity.
+        </p>
+      </div>
+
+      <div class="item-type-display" id="stack-group-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-stack-group"></use>
+          </svg>
+          <h1>Stack Group</h1>
+        </div>
+        <p>
+          A container for other objects that allows items to be stacked
+          horizontally and vertically.
+        </p>
+      </div>
+
+      <div class="item-type-display" id="animated-image-display">
+        <div class="header">
+          <svg class="icon">
+            <use href="icons.svg#icon-animated-image"></use>
+          </svg>
+          <h1>Animated Image</h1>
+        </div>
+        <p>A simple object holding an animated picture (e.g., GIFs).</p>
+      </div>
+    </div>
+
+    <div id="editor-container"></div>
+
+    <div id="attributes-option-select">
+        <h1 id="option-name"></h1>
+        <div class="options-container">
+            <!-- Options will be dynamically added here -->
+        </div>
+    </div>
+
+    <div id="too-small">
+      <h1 id="sad">
+        Your screen is too small to use the editor, I apologize for any
+        inconvenience
+      </h1>
+    </div>
+
+    <script src="dragAndDrop.js" defer></script>
+    <script src="editItemNames.js" defer></script>
+    <script src="projectNameEditor.js" defer></script>
+    <script src="modalHandler.js" defer></script>
+    <script src="importItems.js" defer></script>
+    <script src="editor.js" defer></script>
+    <script src="attributesDisplay.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" defer></script>
+    
+  </body>
+</html>

@@ -1,0 +1,325 @@
+{
+  "preset_info": {
+    "version": 13,
+    "title": "music widget",
+    "description": "description ",
+    "author": "Cole Fekete",
+    "email": "colejfekete@gmail.com",
+    "width": 1038,
+    "height": 158,
+    "features": "MUSIC",
+    "release": 377428214,
+    "locked": false,
+    "pflags": 0
+  },
+  "preset_root": {
+    "internal_events": [
+      {
+        "action": "KUSTOM_ACTION"
+      }
+    ],
+    "internal_type": "RootLayerModule",
+    "config_scale_value": 172.38991,
+    "viewgroup_items": [
+      {
+        "internal_type": "OverlapLayerModule",
+        "internal_title": "Non Touchabled",
+        "internal_events": [
+          {
+            "type": "SINGLE_TAP",
+            "action": "DISABLED"
+          }
+        ],
+        "viewgroup_items": [
+          {
+            "internal_type": "ShapeModule",
+            "internal_title": "Container",
+            "shape_type": "RECT",
+            "shape_width": 95.0,
+            "shape_height": 45.0,
+            "shape_corners": 5.0,
+            "paint_color": "#FF171929"
+          },
+          {
+            "internal_type": "ShapeModule",
+            "shape_type": "RECT",
+            "shape_width": 95.0,
+            "shape_height": 45.0,
+            "shape_corners": 5.0,
+            "paint_style": "STROKE",
+            "paint_color": "#FF25E200",
+            "internal_title": "Outline",
+            "paint_stroke": 0.75,
+            "fx_gradient_color": "#FF1B8916",
+            "fx_gradient_offset": 59,
+            "internal_toggles": {
+              "fx_gradient": 0,
+              "fx_gradient_bitmap": 10
+            },
+            "internal_formulas": {
+              "fx_gradient": "",
+              "fx_gradient_bitmap": "$if(mi(cover)=\"\",\"ni(mi(package), bicon)\",mi(cover))$"
+            },
+            "fx_gradient": "BITMAP"
+          },
+          {
+            "internal_type": "ShapeModule",
+            "internal_title": "Pause/Play + Skip/Reverse Container",
+            "shape_type": "RECT",
+            "shape_width": 25.0,
+            "shape_height": 11.0,
+            "shape_corners": 360,
+            "paint_color": "#FF313131",
+            "position_anchor": "BOTTOM",
+            "position_padding_bottom": 2.0
+          },
+          {
+            "internal_type": "ShapeModule",
+            "internal_title": "Pause/Play + Skip/Reverse Outline",
+            "shape_type": "RECT",
+            "shape_width": 25.0,
+            "shape_height": 11.0,
+            "shape_corners": 360,
+            "paint_color": "#FF0D0D0D",
+            "position_anchor": "BOTTOM",
+            "position_padding_bottom": 2.0,
+            "paint_style": "STROKE",
+            "paint_stroke": 0.33
+          }
+        ]
+      },
+      {
+        "internal_type": "ShapeModule",
+        "internal_toggles": {
+          "fx_gradient_bitmap": 10
+        },
+        "internal_formulas": {
+          "fx_gradient_bitmap": "$if(mi(cover)=\"\",\"ni(mi(package), bicon)\",mi(cover))$"
+        },
+        "shape_width": 25.0,
+        "shape_corners": 5.0,
+        "fx_gradient": "BITMAP",
+        "position_offset_x": -33.0,
+        "position_offset_y": -8.0
+      },
+      {
+        "internal_type": "ShapeModule",
+        "shape_type": "RECT",
+        "shape_width": 17.0,
+        "shape_height": 14.0,
+        "shape_corners": 5.0,
+        "paint_color": "#FF313131",
+        "position_offset_x": -33.0,
+        "position_offset_y": 13.0
+      },
+      {
+        "internal_type": "ProgressModule",
+        "progress_progress": "MUSIC_VOLUME",
+        "color_bgcolor": "#FF000000",
+        "style_style": "CIRCLE",
+        "style_size": 10.0,
+        "style_height": 2.0,
+        "position_offset_x": -33.0,
+        "position_offset_y": 13.0
+      },
+      {
+        "internal_type": "TextModule",
+        "text_expression": "$mi(vol)$%",
+        "text_size": 3.0,
+        "position_offset_x": -33.0,
+        "position_offset_y": 13.0
+      },
+      {
+        "internal_type": "ShapeModule",
+        "internal_toggles": {
+          "fx_gradient_bitmap": 0
+        },
+        "internal_formulas": {
+          "fx_gradient_bitmap": "$mi(cover)$"
+        },
+        "shape_type": "RECT",
+        "shape_width": 65.0,
+        "shape_height": 4.0,
+        "shape_corners": 360,
+        "paint_color": "#66FFFFFF",
+        "position_offset_x": 12.0,
+        "position_offset_y": 4.0
+      },
+      {
+        "internal_type": "ProgressModule",
+        "progress_progress": "CUSTOM",
+        "color_bgcolor": "#00AAAAAA",
+        "style_size": 65.0,
+        "style_width": 60.0,
+        "style_height": 4.0,
+        "position_offset_x": 12.0,
+        "position_offset_y": 4.0,
+        "internal_toggles": {
+          "progress_max": 10,
+          "progress_level": 10
+        },
+        "internal_formulas": {
+          "progress_max": "$mi(len)$",
+          "progress_level": "$mi(pos)$"
+        },
+        "progress_level": 80.0,
+        "color_mode": "OVERLAY"
+      },
+      {
+        "internal_type": "StackLayerModule",
+        "config_scale_value": 64.0,
+        "position_offset_x": -1.0,
+        "position_offset_y": -10.0,
+        "viewgroup_items": [
+          {
+            "internal_type": "TextModule",
+            "text_expression": "$mi(title)$",
+            "text_size_type": "FIXED_WIDTH",
+            "text_width": 57.0,
+            "text_height": 8.0,
+            "text_size": 6.0,
+            "position_offset_x": 8.0
+          },
+          {
+            "internal_type": "TextModule",
+            "text_expression": "By $mi(artist)$",
+            "text_size_type": "FIXED_WIDTH",
+            "text_width": 54.0,
+            "text_height": 22.0,
+            "text_size": 5.0,
+            "paint_color": "#DAFFFFFF",
+            "position_offset_x": 7.0
+          },
+          {
+            "internal_type": "TextModule",
+            "text_expression": "$mi(album)$",
+            "text_size_type": "FIXED_WIDTH",
+            "text_width": 55.0,
+            "text_height": 4.0,
+            "text_size": 4.0,
+            "paint_color": "#CDFFFFFF",
+            "position_offset_x": 7.0
+          }
+        ]
+      },
+      {
+        "internal_type": "StackLayerModule",
+        "config_stacking": "HORIZONTAL_CENTER",
+        "position_offset_y": 15.0,
+        "viewgroup_items": [
+          {
+            "internal_type": "FontIconModule",
+            "icon_icon": "skip_previous",
+            "icon_size": 7.0,
+            "position_offset_x": -7.0,
+            "internal_events": [
+              {
+                "type": "SINGLE_TAP",
+                "action": "MUSIC",
+                "music_action": "PREVIOUS"
+              }
+            ]
+          },
+          {
+            "internal_type": "OverlapLayerModule",
+            "internal_toggles": {
+              "config_visible": 10
+            },
+            "internal_formulas": {
+              "config_visible": "$if(gv(contol), NEVER, ALWAYS)$"
+            },
+            "internal_events": [
+              {
+                "type": "SINGLE_TAP",
+                "action": "SWITCH_GLOBAL",
+                "switch": "contol"
+              },
+              {
+                "type": "SINGLE_TAP",
+                "action": "MUSIC"
+              }
+            ],
+            "viewgroup_items": [
+              {
+                "internal_type": "FontIconModule",
+                "internal_toggles": {
+                  "paint_color": 0,
+                  "icon_icon": 10
+                },
+                "internal_formulas": {
+                  "paint_color": "$if(gv(control), ALWAYS, NEVER) $",
+                  "icon_icon": "$if(mi(state)=PLAYING,pause, Play_arrow)$"
+                },
+                "icon_icon": "pause",
+                "icon_size": 7.0,
+                "internal_events": [
+                  {
+                    "type": "SINGLE_TAP",
+                    "action": "SWITCH_GLOBAL",
+                    "switch": "contol"
+                  },
+                  {
+                    "type": "SINGLE_TAP",
+                    "action": "MUSIC"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "internal_type": "FontIconModule",
+            "icon_icon": "skip_next",
+            "icon_size": 7.0,
+            "position_offset_x": 7.0,
+            "internal_events": [
+              {
+                "type": "SINGLE_TAP",
+                "action": "MUSIC",
+                "music_action": "NEXT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "internal_type": "ShapeModule",
+        "shape_type": "RECT",
+        "shape_width": 65.0,
+        "shape_height": 3.0,
+        "shape_corners": 360,
+        "paint_color": "#66FFFFFF",
+        "position_offset_x": 12.0,
+        "position_offset_y": 4.0,
+        "internal_toggles": {
+          "fx_gradient_bitmap": 10
+        },
+        "internal_formulas": {
+          "fx_gradient_bitmap": "$mi(cover)$"
+        },
+        "paint_style": "STROKE",
+        "paint_stroke": 3.0,
+        "fx_gradient": "BITMAP"
+      },
+      {
+        "internal_type": "BitmapModule",
+        "bitmap_bitmap": "kfile://org.kustom.provider/bitmaps/IMGb74f795d3ecfb5435ee826cb762090e5",
+        "bitmap_width": 7.0,
+        "position_offset_x": 40.0,
+        "position_offset_y": -16.0,
+        "internal_events": [
+          {
+            "type": "SINGLE_TAP",
+            "action": "LAUNCH_APP",
+            "intent": "intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;component=com.pandora.android/.LauncherActivity;S.org.kustom.intent.label=Pandora;end"
+          }
+        ],
+        "internal_toggles": {
+          "bitmap_bitmap": 10
+        },
+        "internal_formulas": {
+          "bitmap_bitmap": "$mi(package)$"
+        }
+      }
+    ]
+  }
+}

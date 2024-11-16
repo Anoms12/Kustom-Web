@@ -1,0 +1,838 @@
+:root {
+  --Kustom-background: #333;
+  --white: #fff;
+  --Kustom-color: #ed4852;
+  --Icons-and-Unsable: #acacac;
+  --icon-size: 36px;
+  --transition-duration: 0.3s;
+  --scale-factor-hover: 1.05; /* Slightly larger scale for hover */
+  --scale-factor-active: 0.95; /* Slightly smaller scale for active */
+  --font-family: 'Roboto', sans-serif; /* Default font set to Roboto */
+}
+
+/* Body Styles */
+body {
+  font-family: var(--font-family);
+  background-color: var(--Kustom-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  user-select: none;
+}
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #333; /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensures loading screen is above all content */
+}
+
+.spinner {
+  border: 8px solid #f3f3f3; /* Light gray background */
+  border-top: 8px solid var(--Kustom-color); /* Red spinner */
+  border-radius: 50%;
+  width: 60px; /* Spinner size */
+  height: 60px; /* Spinner size */
+  animation: spin 1s linear infinite; /* Animation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.project-input,
+.editable {
+  margin: 0;
+  display: block;
+  color: var(--white);
+  font-size: 18px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+.project-input,
+.editable ::placeholder {
+  color: var(--white);
+  border: solid 1px var(--white);
+}
+
+/* Editor Container */
+#editor-container {
+  position: relative;
+  top: 6vh; /* Adjust for scaling with viewport height */
+  transform: scale(0.5); /* Scale down based on the new baseline */
+  transform-origin: top;
+  background-color: #444;
+  border: 1px solid #ccc;
+  width: 540px; /* Scaled based on 1440p */
+  height: 1200px; /* Scaled based on 1440p */
+  margin-right: 20%;
+}
+
+/* Top Functions Container */
+#top-functions-container {
+  position: absolute; /* Keeps the container at the top */
+  top: 0;
+  display: flex; /* Use flexbox for alignment */
+  justify-content: flex-end; /* Align items to the right */
+  margin-right: 1%;
+  align-items: center; /* Center items vertically */
+  width: 100%;
+  height: calc(50px / 1.33); /* Adjust height based on 1440p */
+  border-bottom: 1px solid var(--Text-Clor, var(--white));
+  padding: 0 10px; /* Optional: Add some horizontal padding */
+  background: #444;
+}
+
+#project-info {
+  transform-origin: right;
+  position: absolute;
+  left: 1.5%;
+  overflow-x: visible;
+}
+
+#project-type {
+  margin: 0;
+  display: block;
+  color: var(--Icons-and-Unsable);
+  font-size: 15px;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+.project-name {
+  margin: 0;
+  display: block;
+  color: var(--white);
+  font-size: 18px;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+/* Button Container */
+.button-container {
+  display: flex; /* Use flexbox for each button container */
+  align-items: center; /* Center label and button vertically */
+  margin-left: 10px; /* Add left margin for spacing between buttons */
+}
+
+/* Save Buttons */
+.save-btns {
+  border: 2px solid var(--Kustom-color);
+  border-radius: 4px;
+  color: var(--Kustom-color); /* Original KLWP red for text */
+  font-family: var(--font-family); /* Consistent font */
+  font-size: 12px;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: transparent; /* Keep transparent background */
+  transition: all var(--transition-duration) ease; /* Smooth transition for hover effects */
+  position: relative;
+  overflow: hidden; /* Prevent overflow during animation */
+}
+
+/* Subtle background animation on hover */
+.save-btns::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 0, 0, 0.1); /* Light KLWP red tint */
+  transition: all 0.5s ease;
+  transform: translateX(-50%) translateY(-100%);
+}
+
+/* Hover state for button */
+.save-btns:hover::before {
+  transform: translateX(-50%) translateY(0); /* Slide background down */
+}
+
+.save-btns:hover {
+  background-color: var(--Kustom-background); /* Dark KLWP background on hover */
+  border-color: var(--Kustom-color); /* Keep KLWP red border */
+  color: var(--white); /* Change text color to white on hover */
+  transform: scale(1.05); /* Slight scale up on hover */
+}
+
+/* Optional: Add a scaling animation for the text */
+.save-btns:hover span {
+  animation: textPop var(--transition-duration) ease-in-out forwards;
+}
+
+/* Text animation */
+@keyframes textPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Hide button (optional) */
+.save-btn {
+  display: none; /* Keep this if you don't want the button to be visible */
+}
+
+#add-icon {
+  cursor: pointer; /* Change cursor to pointer for better UX */
+  transition: transform 0.2s ease, fill 0.2s ease; /* Transition for transform and fill color */
+}
+
+/* Hover effect */
+#add-icon:hover {
+  transform: scale(1.1); /* Scale up on hover */
+}
+
+/* Click effect */
+#add-icon:active {
+  transform: scale(0.9); /* Scale down on click */
+}
+
+/* Optional: Change the fill color on hover */
+#add-icon:hover use {
+  fill: #ff5733; /* Change to a different color when hovered */
+}
+
+#selected-options {
+  display: none;
+}
+
+/* Left Functions Container */
+#left-functions-container {
+  position: absolute;
+  width: calc(50px / 1.33); /* Adjust width based on 1440p scaling */
+  height: calc(72vh - 3.92vh); /* Adjust height relative to viewport */
+  top: 3.92vh; /* Positioning from the top */
+  left: 0%;
+  border-right: 1px solid var(--Text-Clor, var(--white));
+  background: #141414;
+}
+
+#right-functions-container {
+  position: absolute;
+  width: calc(50px / 1.33); /* Adjust width based on 1440p scaling */
+  height: calc(72vh - 3.92vh); /* Adjust height relative to viewport */
+  top: 3.92vh; /* Positioning from the top */
+  right: 0%;
+  border-left: 1px solid var(--Text-Clor, var(--white));
+  background: #141414;
+}
+
+/* Right Functions Container */
+#right-editor-container {
+  position: absolute;
+  width: calc(500px / 1.33); /* Adjust width based on 1440p scaling */
+  height: calc(72vh - 3.92vh); /* Adjust height relative to viewport */
+  top: 3.92vh; /* Positioning from the top */
+  right: calc(50px / 1.33);
+  border-left: 1px solid var(--Text-Clor, var(--white));
+  background: var(--Kustom-background);
+}
+
+/* Bottom Controls Container */
+#bottom-controls-container {
+  position: absolute;
+  bottom: 0;
+  height: 28vh; /* Adjust height using vh */
+  width: 100%;
+  border-top: 1px solid var(--Text-Clor, var(--white));
+}
+
+/* Main Functions Overall */
+#main-functions-overall {
+  display: flex;
+  width: calc(100vw - 10px); /* Use full viewport width */
+  align-items: center;
+  justify-content: space-between; /* Distribute space evenly */
+  padding: 0 5px; /* Add padding on the left and right */
+  border-bottom: 1px solid var(--white);
+}
+
+/* Main Functions */
+.main-functions {
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--white);
+  margin-bottom: -1px;
+  font-family: Inter;
+  font-size: 8px;
+  color: var(--Text-Color, var(--white));
+  font-weight: 100;
+  line-height: normal;
+  text-align: center;
+  flex-shrink: 0;
+  transition: color 0.2s ease, transform 0.2s ease;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+.main-functions:hover {
+  color: var(--Hover-Color, #ccc); /* Minimal color change */
+  transform: scale(0.95);
+  cursor: pointer;
+}
+
+.main-functions:active {
+  transform: scale(01.05); /* Subtle shrink on click */
+}
+
+#items-tab-functions {
+  border-bottom: solid 1px var(--Kustom-color);
+}
+
+.not-functionable-yet {
+  color: var(--Icons-and-Unsable);
+  margin-right: 2%;
+}
+
+#display-general-options {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: calc(100vh - 75vh); /* Adjust to fit your layout */
+  overflow-y: auto; /* Allow scrolling when content exceeds the container */
+  margin-top: 0;
+}
+
+#general-options {
+  padding-top: 0;
+  margin-top: 0;
+  width: 100vw;
+  min-height: 23%; /* For a single option, take up 25% of the container */
+  max-height: 23%; /* Allow dynamic height for multiple options */
+  border-right: solid 1px var(--white);
+  border-left: solid 1px var(--white);
+  border-bottom: solid 1px var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  box-sizing: border-box;
+  position: relative; /* Needed for sticky to work properly */
+  font-family: var(--font-family); /* Consistent font */
+}
+
+#selected-icon {
+  position: sticky; /* Sticky positioning to keep it in view when scrolling */
+  right: 0; /* Stick to the right side */
+  top: 0; /* Stick to the top when scrolling (can adjust as needed) */
+  padding-right: 10px; /* Space from the right edge */
+  fill: none;
+  margin-left: auto; /* Push it to the right */
+}
+
+#option-name-description {
+  padding-left: 10px;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+#drag-to-sort-icons {
+  padding-right: 10px;
+}
+
+.general-options-icons {
+  width: 36px;
+  height: 36px;
+  fill: none;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+/* Icon Styles */
+.icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  transition: transform var(--transition-duration) ease, filter var(--transition-duration) ease;
+}
+
+.icon:hover {
+  transform: scale(var(--scale-factor-hover)); /* Subtle expansion on hover */
+  filter: brightness(0.9); /* Slightly darken on hover */
+}
+
+.icon:active {
+  transform: scale(var(--scale-factor-active)); /* Subtle shrink on click */
+}
+
+/* Remove animations for icons in select-item-type and general-options */
+#select-item-type .icon,
+#general-options .icon {
+  transition: none; /* Disable transition for these icons */
+}
+
+.general-options-icons path {
+  fill: #acacac;
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+}
+
+#main-option-name {
+  color: var(--white);
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+#main-option-description {
+  color: var(--Icons-and-Unsable);
+  font-family: Inter;
+  font-size: 10px;
+  font-weight: 400;
+  text-align: left;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+.editable {
+  border: 1px solid #ccc; /* Adds a border when editing */
+  padding: 2px;
+}
+
+.sortable {
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth opacity and transform changes */
+}
+
+.sortable.dragging {
+  opacity: 0.5; /* Reduce opacity when dragging */
+  transform: scale(1.02); /* Slightly enlarge the item while dragging */
+}
+
+#overlay {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  z-index: 999; /* Ensure it's above other elements */
+}
+
+/* Show the overlay when modal is active */
+body.modal-open #overlay,
+body.attributes-option-open #attributes-option-select {
+  display: block;
+}
+
+#select-item-type {
+  position: fixed; /* Use fixed positioning to keep it centered and not affect other elements */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for the element's own dimensions */
+  z-index: 1000; /* Ensure it is above other elements */
+  width: calc(1000px / 1.33); /* Scaled based on 1440p */
+  height: calc(700px / 1.33); /* Adjusted height */
+  border-radius: 12px;
+  background: var(--Kustom-background);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+  display: none; /* Initially hidden */
+  flex-wrap: wrap; /* Allow wrapping to the next line */
+  justify-content: center; /* Align items to the center */
+  gap: 15px; /* Add some space between items */
+  padding: 10px; /* Add padding inside the container */
+}
+
+.item-type-display {
+  flex: 1 1 calc(25% - 20px); /* Each item takes up 25% of the row, with a 20px total gap */
+  box-sizing: border-box; /* Include padding and border in element's total width */
+  max-width: calc(25% - 20px); /* Ensure items don’t exceed the specified width */
+  max-height: calc(35% - 20px);
+  background-color: grey; /* Set the background color to grey */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px; /* Add some padding inside each item */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; /* Smooth transitions */
+  user-select: none; /* Prevent text from being selected */
+}
+
+.item-type-display:hover {
+  transform: scale(1.05); /* Slightly enlarge the item on hover */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+  opacity: 0.9; /* Dim the item slightly on hover */
+}
+
+.item-type-display:active {
+  transform: scale(0.98); /* Slightly shrink the item when clicked */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Reduce shadow on click */
+  opacity: 0.8; /* Dim the item further when clicked */
+}
+
+.header {
+  display: flex; /* Enable flexbox for header layout */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 1px; /* Space between header and paragraph */
+}
+
+.item-type-display svg {
+  margin-right: 5px; /* Space between icon and title */
+  transition: transform 0.3s ease; /* Smooth transition for icon */
+}
+
+.item-type-display:hover svg {
+  transform: rotate(5deg); /* Slight rotate effect on the icon */
+}
+
+.item-type-display h1 {
+  margin: 0; /* Remove default margin */
+  font-size: 16px; /* Set font size for h1 */
+  color: white; /* Set text color to white */
+  text-align: left;
+}
+
+.item-type-display p {
+  margin: 0 0 0 0;
+  font-size: 12px; /* Set font size for p */
+  color: var(--Icons-and-Unsable);
+  overflow: hidden;
+}
+
+.item-type-display h1,
+.item-type-display p {
+  transition: color 0.3s ease, opacity 0.3s ease; /* Smooth text transition */
+}
+
+.item-type-display:hover h1,
+.item-type-display:hover p {
+  opacity: 0.9; /* Dim the text slightly when hovering */
+}
+
+.item-attribute {
+  position: relative; /* Needed for absolute positioning of child elements */
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  margin-top: 0;
+  width: 100%;
+  height: 7%;
+  border-right: solid 1px var(--white);
+  border-left: solid 1px var(--white);
+  border-bottom: solid 1px var(--white);
+  box-sizing: border-box;
+}
+
+#attribute-icon {
+  margin-left: 10px;
+}
+
+#attribute-name {
+  position: relative;
+  left: 0;
+  padding-left: 5px;
+  color: var(--white);
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+.attribute-value {
+  color: var(--white);
+  padding-left: 10px;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+#hex-value {
+  color: var(--white);
+  padding-left: 10px;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+#select-attribute-selected-icon {
+  width: 36px !important;
+  height: 36px !important;
+  position: absolute;
+  right: 0;
+  margin-left: 5px; /* Push it to the right */
+  fill: none;
+}
+
+.pickr {
+  margin-left: auto;
+  position: absolute; /* Remove from normal flow */
+  right: 0; /* Align to the right of the container */
+  transform: translateY(-50%); /* Adjust for vertical centering */
+  display: flex;
+  align-items: center;
+}
+
+#down-buttons {
+  position: relative;
+  left: 10px;
+}
+
+#up-buttons {
+  position: relative;
+  right: 0;
+}
+
+#subtract-twenty {
+  transform: rotate(180deg);
+}
+
+
+.slider {
+  -webkit-appearance: none;
+  appearance: var(--white);
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+#slider-attribute-value {
+  padding-right: 10px;
+  color: var(--white);
+  padding-left: 10px;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+/* Hide the #too-small element by default */
+#too-small {
+  display: none;
+}
+
+/* Show the #too-small element when the screen is under 902px width and 992px height */
+@media (max-width: 925px) or (max-height: 900px) {
+  #too-small {
+    display: block !important;
+    width: 100vw;
+    height: 100vh;
+    fill: var(--white);
+    font-family: var(--font-family);
+    left: 50%;
+    right: 50%;
+    background: var(--Kustom-background);
+    z-index: 2000000;
+  }
+}
+
+#sad {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  fill: white;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: var(--font-family); /* Consistent font */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #editor-container {
+    width: 90vw; /* Use viewport width for scaling */
+    height: auto; /* Allow height to adjust automatically */
+    margin-right: 5%;
+    transform: scale(0.8); /* Adjust scale for smaller screens */
+  }
+
+  #top-functions-container,
+  #bottom-controls-container,
+  #main-functions-overall {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+    padding: 10px; /* Add padding for better spacing */
+  }
+
+  .save-btns {
+    font-size: 10px; /* Smaller font size for buttons */
+    padding: 4px 8px; /* Adjust padding */
+  }
+
+  .item-type-display {
+    flex: 1 1 100%; /* Full width for each item */
+    max-width: 100%; /* Ensure items don’t exceed the container */
+  }
+}
+
+/* Further adjustments for very small screens */
+@media (max-width: 480px) {
+  body {
+    flex-direction: column; /* Stack elements vertically */
+    padding: 10px; /* Add padding for better spacing */
+  }
+
+  .icon {
+    width: 24px; /* Smaller icon size */
+    height: 24px;
+  }
+
+  #select-item-type {
+    width: 90vw; /* Use most of the viewport width */
+    height: auto; /* Allow height to adjust automatically */
+  }
+}
+
+.pcr-app {
+  background-color: var(--Kustom-background) !important;
+  border: 1px solid var(--white) !important;
+  color: var(--white) !important;
+}
+
+.pcr-button {
+  background-color: var(--Kustom-color) !important;
+  border: none !important;
+}
+
+.pcr-button:hover {
+  background-color: var(--Icons-and-Unsable) !important;
+}
+
+.pcr-interaction {
+  color: var(--white) !important;
+}
+
+#attribute-types {
+  overflow-y: hidden;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1.5px solid var(--Icons-and-Unsable);
+  height: 2.5%;
+}
+
+.attribute-type {
+  height: 100%;
+  color: var(--white);
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+}
+
+.attribute-type:hover {
+  color: white;
+  transform: translateY(-2px);
+}
+
+.attribute-type:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--Kustom-color);
+  transition: all 0.3s ease-in-out;
+}
+
+.attribute-type:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+.attribute-type:active {
+  transform: translateY(1px);
+}
+
+#attributes-option-select {
+  position: absolute;
+  display: none; /* Initially hidden */
+  width: 700px;
+  height: min-content;
+  background-color: #444;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000; /* Ensure it's above other elements */
+  border-radius: 10px;
+}
+
+.option {
+  color: var(--white);
+  font-size: 20px;
+  font-family: var(--font-family);
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.option:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Lighten on hover */
+}
+
+#option-hex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align items to the start */
+  gap: 10px; /* Add gap between elements */
+}
+
+#option-hex #color-picker-container {
+  flex-shrink: 0; /* Prevent shrinking */
+  margin-right: 20px; /* Add margin to the right for spacing */
+}
+
+#option-hex #select-attribute-selected-icon {
+  margin-left: auto; /* Push the icon to the far right */
+}
+
+.pickr {
+  margin-right: 40px !important;
+}
+
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="page-styles.css" />
+    <title>Kustom Web Editor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body id="body">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Main content area -->
+    <div id="main-content" style="display: none;">
+      <div id="upload-kustom-file">
+        <label for="kustom-file-upload" class="kustom-file-upload">
+          Upload Kustom File
+        </label>
+        <input
+          id="kustom-file-upload"
+          type="file"
+          accept=".klwp, .kwgt, .kwch, .klck, .komp"
+        />
+      </div>
+
+      <div id="create-kustom-file">
+        <button id="create-kustom-file-btn" class="kustom-file-upload">
+          Create Kustom File +
+        </button>
+      
+        <!-- Dropdown menu (hidden by default) -->
+        <div id="dropdown" class="dropdown hidden">
+          <ul>
+            <li><a href="#" data-option="klwp">KLWP</a></li>
+            <li><a href="#" data-option="kwgt">KWGT (under construction)</a></li>
+            <li><a href="#" data-option="klck">KLCK</a></li>
+            <li><a href="#" data-option="kwch">KWCH</a></li>
+            <li><a href="#" data-option="komp">KOMP</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
