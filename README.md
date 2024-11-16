@@ -5,15 +5,15 @@ A project that aims to be a web editor for Kustom apps like KWGT or KLWP.
 
 ☑️ Create a simple website to display information inside of .KWGT .KLWP .KLCK .KWCH and .KOMP files
 
-⬛Create UI for the Kustom web editor
+☑️Create UI for the Kustom web editor
 
-⬛ Create a menu to choose what filetype you are creating
+☑️ Create a menu to choose what filetype you are creating
 
-⬛Allow for the creation of static objects like the group, shape, and text
+☑️Allow for the creation of static objects like the group, shape, and text
 
 ⬛ Allow images to be used in web editor
 
-⬛ Allow for the usage of code
+⬛ Allow for the usage of kode
 
 ⬛ implement flows
 
