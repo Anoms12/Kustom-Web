@@ -1,6 +1,8 @@
 # Kustom-Web
 A project that aims to be a web editor for Kustom apps like KWGT or KLWP.
 
+**PLEASE NOTE THAT THE SRC FOLDER NAME WILL NEED TO BE CHANGED TO EDITOR FOR THE PROJECT TO WORK**
+
 **Goals**
 
 ☑️ Create a simple website to display information inside of .KWGT .KLWP .KLCK .KWCH and .KOMP files
